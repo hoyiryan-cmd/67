@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: learning-echo
+    runtime: python
+    plan: starter
+    buildCommand: python -m compileall -q app.py
+    startCommand: python app.py
+    healthCheckPath: /health
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: FEEDBACK_DB
+        value: /var/data/feedback.db
+    disk:
+      name: feedback-data
+      mountPath: /var/data
+      sizeGB: 1
